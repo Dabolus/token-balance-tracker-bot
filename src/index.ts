@@ -1,12 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import { EthereumNetwork } from './generated/graphql';
 import { getAddressesBalances } from './query';
-import {
-  getMarkdown,
-  numberFormatter,
-  currencyFormatter,
-  computeTotal,
-} from './utils';
+import { getMarkdown, configureFormatters, computeTotal } from './utils';
 import config from './config.json';
 
 const bot = new TelegramBot(process.env.BOT_TOKEN, {
@@ -19,6 +14,11 @@ bot.onText(/^\/balance/, async msg => {
   if (!chatConfig) {
     return;
   }
+
+  const { numberFormatter, currencyFormatter } = configureFormatters(
+    msg.from?.language_code || 'en',
+    process.env.OUTPUT_CURRENCY || 'USD',
+  );
 
   bot.sendChatAction(msg.chat.id, 'typing');
 

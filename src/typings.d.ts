@@ -3,5 +3,6 @@ declare namespace NodeJS {
     BOT_TOKEN: string;
     BITQUERY_API_KEY: string;
     MESSAGE_TEMPLATE_PATH?: string;
+    OUTPUT_CURRENCY?: string;
   }
 }

@@ -3,10 +3,12 @@ import path from 'path';
 import { compile } from 'handlebars';
 import { AddressBalance } from './query';
 
-export const numberFormatter = new Intl.NumberFormat('en');
-export const currencyFormatter = new Intl.NumberFormat('en', {
-  style: 'currency',
-  currency: 'USD',
+export const configureFormatters = (locale: string, currency: string) => ({
+  numberFormatter: new Intl.NumberFormat(locale),
+  currencyFormatter: new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+  }),
 });
 
 export const computeTotal = (balances: AddressBalance[]) =>
