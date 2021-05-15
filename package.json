@@ -1,0 +1,25 @@
+{
+  "name": "token-balance-tracker-bot",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node scripts/watch.js",
+    "build": "node scripts/build.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "node-telegram-bot-api": "^0.53.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "@types/node-fetch": "^2.5.10",
+    "@types/node-telegram-bot-api": "^0.51.1",
+    "chokidar": "^3.5.1",
+    "dotenv": "^8.2.0",
+    "esbuild": "^0.11.11",
+    "esbuild-node-externals": "^1.2.0",
+    "nodemon": "^2.0.7",
+    "typescript": "^4.2.4"
+  }
+}
