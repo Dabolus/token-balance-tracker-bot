@@ -1,0 +1,13 @@
+{{#each result}}
+*Address {{address}} ({{network}}):*
+
+{{#each balance}}
+*{{name}}:*
+`{{balance}} {{symbol}}` (`{{value}}`)
+
+{{/each}}
+——————————
+
+{{/each}}
+*TOTAL:*
+`{{total}}`

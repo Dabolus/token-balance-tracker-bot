@@ -12,6 +12,7 @@
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "graphql-tag": "^2.12.4",
+    "handlebars": "^4.7.7",
     "node-telegram-bot-api": "^0.53.0"
   },
   "devDependencies": {

@@ -1,7 +1,12 @@
 import TelegramBot from 'node-telegram-bot-api';
 import { EthereumNetwork } from './generated/graphql';
 import { getAddressesBalances } from './query';
-import { computeTotal, currencyFormatter, numberFormatter } from './utils';
+import {
+  getMarkdown,
+  numberFormatter,
+  currencyFormatter,
+  computeTotal,
+} from './utils';
 import config from './config.json';
 
 const bot = new TelegramBot(process.env.BOT_TOKEN, {
@@ -35,23 +40,21 @@ bot.onText(/^\/balance/, async msg => {
 
   await bot.sendMessage(
     msg.chat.id,
-    `${allBalances
-      .map(
-        ({ network, address, balance }) =>
-          `*Address 0x…${address.slice(
-            -4,
-          )} (${network.toUpperCase()}):*\n\n${balance
-            .map(
-              ({ name, symbol, balance: tokenBalance, value }) =>
-                `*${name}:*\n\`${numberFormatter.format(
-                  tokenBalance,
-                )} ${symbol}\` (\`${currencyFormatter.format(value)}\`)`,
-            )
-            .join('\n\n')}`,
-      )
-      .join('\n\n---\n\n')}\n\n---\n\n*TOTAL:*\n\`${currencyFormatter.format(
-      computeTotal(allBalances),
-    )}\``.replace(/[,.()-]/g, '\\$&'),
+    getMarkdown({
+      result: allBalances.map(({ network, address, balance }) => ({
+        network: network.toUpperCase(),
+        address: `0x…${address.slice(-4)}`,
+        balance: balance.map(
+          ({ name, symbol, balance: tokenBalance, value }) => ({
+            name,
+            symbol,
+            balance: numberFormatter.format(tokenBalance),
+            value: currencyFormatter.format(value),
+          }),
+        ),
+      })),
+      total: currencyFormatter.format(computeTotal(allBalances)),
+    }).replace(/[,.()-]/g, '\\$&'),
     {
       parse_mode: 'MarkdownV2',
     },
