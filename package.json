@@ -5,15 +5,22 @@
   "license": "MIT",
   "scripts": {
     "start": "node scripts/watch.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "codegen": "graphql-codegen -r dotenv/config --config codegen.yml"
   },
   "dependencies": {
-    "node-fetch": "^2.6.1",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
+    "graphql-tag": "^2.12.4",
     "node-telegram-bot-api": "^0.53.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "1.21.4",
+    "@graphql-codegen/typescript": "1.22.0",
+    "@graphql-codegen/typescript-graphql-request": "^3.2.0",
+    "@graphql-codegen/typescript-operations": "^1.17.16",
+    "@graphql-codegen/typescript-resolvers": "1.19.1",
     "@types/node": "^14.14.37",
-    "@types/node-fetch": "^2.5.10",
     "@types/node-telegram-bot-api": "^0.51.1",
     "chokidar": "^3.5.1",
     "dotenv": "^8.2.0",
